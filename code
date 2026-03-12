@@ -1,1164 +1,926 @@
-Practical No.1 : Image Processing Operations Using OpenCV in Python
+PRACTICAL 1
 
+Read & Write Image
 
-1.Read & Write Image
-Code:
-# Import OpenCV for image processing
 import cv2
-# Import Matplotlib for displaying images and histograms
 import matplotlib.pyplot as plt
-# Read the input image in BGR format
+
 img = cv2.imread("sample.jpg")
-# Create a figure window of size 10x5
+
 plt.figure(figsize=(10,5))
-# Select the first subplot (for displaying image)
+
 plt.subplot(1,2,1)
-# Convert BGR image to RGB for correct color display in Matplotlib
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-# Set the title for the original image
 plt.title("Original Image")
-# Select the second subplot (for histogram)
+
 plt.subplot(1,2,2)
-# Plot the histogram of all pixel values (0–255)
-plt.hist(img.ravel(), 256)
-# Set the title for the histogram
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# Display both image and histogram
+
 plt.show()
-# Save the read image as "output_read.jpg"
+
 cv2.imwrite("output_read.jpg", img)
 
+Get Image Information
 
-1.Get Image Information
-	Code:
- # Import OpenCV library
-import cv2
-# Read the image
+	import cv2
+
 img = cv2.imread("sample.jpg")
-# Extract image dimensions using .shape
-height, width, channels = img.shape
-# Print image information
-print("Height  :", height)
-print("Width   :", width)
-print("Channels:", channels)
 
-1.Rotation
-Code:
-# Import required libraries
-import cv2
+h, w, c = img.shape
+
+print("Height  :", h)
+print("Width   :", w)
+print("Channels:", c)
+
+Rotation
+
+	import cv2
 import matplotlib.pyplot as plt
-# Read the input image
+
 img = cv2.imread("sample.jpg")
-# Rotate the image 90 degrees clockwise
-rotated = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-# Display original image and histogram
-# Create a single figure for 2 rows and 2 columns
-plt.figure(figsize=(12, 10))
-# Original Image (Top-Left: Position 1)
-plt.subplot(2, 2, 1)
+rot = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+
+plt.figure(figsize=(12,10))
+
+plt.subplot(2,2,1)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-# Original Histogram (Top-Right: Position 2)
-plt.subplot(2, 2, 2)
-plt.hist(img.ravel(), 256)
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# Rotated Image (Bottom-Left: Position 3)
-plt.subplot(2, 2, 3)
-plt.imshow(cv2.cvtColor(rotated, cv2.COLOR_BGR2RGB))
+
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(rot, cv2.COLOR_BGR2RGB))
 plt.title("Rotated Image")
-# Rotated Histogram (Bottom-Right: Position 4)
-plt.subplot(2, 2, 4)
-plt.hist(rotated.ravel(), 256)
+
+plt.subplot(2,2,4)
+plt.hist(rot.ravel(),256)
 plt.title("Rotated Histogram")
-# Adjust spacing between plots
+
 plt.tight_layout()
-# Display all images and histograms
 plt.show()
-Output Screenshot:
 
+Cropping
 
-1.Cropping
-Code:
-# Import libraries
-import cv2
+	import cv2
 import matplotlib.pyplot as plt
-# Read image
+
 img = cv2.imread("sample.jpg")
-# Crop image using array slicing
-# (Here cropping area is from rows 50–300 and columns 50–300)
-cropped = img[50:300, 50:300]
-# Create a single figure for all four plots (2 rows, 2 columns)
-plt.figure(figsize=(12, 10))
-# --- 1. Original Image (Top-Left: Position 1) ---
-plt.subplot(2, 2, 1)
-# Convert BGR to RGB for Matplotlib
+crop = img[50:300, 50:300]
+
+plt.figure(figsize=(12,10))
+
+plt.subplot(2,2,1)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-# --- 2. Original Histogram (Top-Right: Position 2) ---
-plt.subplot(2, 2, 2)
-# Calculate histogram of all pixel values
-plt.hist(img.ravel(), 256)
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# --- 3. Cropped Image (Bottom-Left: Position 3) ---
-plt.subplot(2, 2, 3)
-# Convert BGR to RGB for Matplotlib
-plt.imshow(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))
+
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB))
 plt.title("Cropped Image")
-# --- 4. Cropped Histogram (Bottom-Right: Position 4) ---
-plt.subplot(2, 2, 4)
-# Calculate histogram of all pixel values for the cropped image
-plt.hist(cropped.ravel(), 256)
+
+plt.subplot(2,2,4)
+plt.hist(crop.ravel(),256)
 plt.title("Cropped Histogram")
-# Adjust spacing between plots to ensure readability
+
 plt.tight_layout()
-# Display all images and histograms in the single figure
 plt.show()
 
 Scaling
-	Code:
-	# Import libraries
-import cv2
+
+	import cv2
 import matplotlib.pyplot as plt
-# Read the original image
+
 img = cv2.imread("sample.jpg")
-# Resize image to 400x400 pixels
-scaled = cv2.resize(img, (400, 400))
-# Create a single figure for all four plots (2 rows, 2 columns)
-plt.figure(figsize=(12, 10))
-# --- 1. Original Image (Top-Left: Position 1) —
-# Display original image
-plt.subplot(2, 2, 1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+scaled = cv2.resize(img,(400,400))
+
+plt.figure(figsize=(12,10))
+
+plt.subplot(2,2,1)
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-# --- 2. Original Histogram (Top-Right: Position 2) —
-# Display original histogram
-plt.subplot(2, 2, 2)
-plt.hist(img.ravel(), 256)
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# --- 3. Scaled Image (Bottom-Left: Position 3) —
-# Display scaled image
-plt.subplot(2, 2, 3)
-plt.imshow(cv2.cvtColor(scaled, cv2.COLOR_BGR2RGB))
+
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(scaled,cv2.COLOR_BGR2RGB))
 plt.title("Scaled Image (400x400)")
-# --- 4. Scaled Histogram (Bottom-Right: Position 4) —
-# Display scaled histogram
-plt.subplot(2, 2, 4)
-plt.hist(scaled.ravel(), 256)
+
+plt.subplot(2,2,4)
+plt.hist(scaled.ravel(),256)
 plt.title("Scaled Histogram")
-# Adjust spacing between plots
+
 plt.tight_layout()
-# Display all images and histograms in the single figure
 plt.show()
 
 Interpolation & Resizing
-Code:
-# Import libraries
-import cv2
+
+	import cv2
 import matplotlib.pyplot as plt
-# Read image
+
 img = cv2.imread("sample.jpg")
-# Resize image using Cubic Interpolation (high quality)
-resized = cv2.resize(img, (300, 300), interpolation=cv2.INTER_CUBIC)
-# Create a single figure for all four plots (2 rows, 2 columns)
-plt.figure(figsize=(12, 10))
-# --- 1. Original Image (Top-Left: Position 1) ---
-# Display original image
-plt.subplot(2, 2, 1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+resized = cv2.resize(img,(300,300),interpolation=cv2.INTER_CUBIC)
+
+plt.figure(figsize=(12,10))
+
+plt.subplot(2,2,1)
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-# --- 2. Original Histogram (Top-Right: Position 2) ---
-# Display original histogram
-plt.subplot(2, 2, 2)
-plt.hist(img.ravel(), 256)
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# --- 3. Resized Image (Bottom-Left: Position 3) ---
-# Display resized image
-plt.subplot(2, 2, 3)
-plt.imshow(cv2.cvtColor(resized, cv2.COLOR_BGR2RGB))
+
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(resized,cv2.COLOR_BGR2RGB))
 plt.title("Resized Image (Cubic Interpolation)")
-# --- 4. Resized Histogram (Bottom-Right: Position 4) ---
-# Display resized histogram
-plt.subplot(2, 2, 4)
-plt.hist(resized.ravel(), 256)
+
+plt.subplot(2,2,4)
+plt.hist(resized.ravel(),256)
 plt.title("Resized Histogram")
-# Adjust spacing between plots
+
 plt.tight_layout()
-# Display all images and histograms in the single figure
 plt.show()
-Output Screenshot:
-	
-C.  Adjust Image Contrast:
-Code:
-# Import OpenCV and Matplotlib
-import cv2
+
+Adjust Image Contrast:
+
+	import cv2
 import matplotlib.pyplot as plt
-# Step 1: Read the original image
+
 img = cv2.imread("sample.jpg")
-# Step 2: Adjust contrast (alpha = contrast, beta = brightness)
-contrast_img = cv2.convertScaleAbs(img, alpha=1.5, beta=20)
-# Step 3: Create figure layout
+contrast = cv2.convertScaleAbs(img,alpha=1.5,beta=20)
+
 plt.figure(figsize=(12,6))
-# Original Image (Left)
+
 plt.subplot(2,2,1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-# Original Histogram (Right)
+
 plt.subplot(2,2,2)
-plt.hist(img.ravel(), 256)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# Contrast Adjusted Image (Left)
+
 plt.subplot(2,2,3)
-plt.imshow(cv2.cvtColor(contrast_img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(contrast,cv2.COLOR_BGR2RGB))
 plt.title("Contrast Adjusted Image")
-# Adjusted Histogram (Right)
+
 plt.subplot(2,2,4)
-plt.hist(contrast_img.ravel(), 256)
+plt.hist(contrast.ravel(),256)
 plt.title("Contrast Adjusted Histogram")
-plt.show()
-# Save output
-cv2.imwrite("contrast_adjusted.jpg", contrast_img)
 
-D.  Convert RGB to Gray:
-Code:
-# Import libraries
+plt.show()
+
+cv2.imwrite("contrast_adjusted.jpg",contrast)
+
+Convert RGB to Gray:
+
 import cv2
 import matplotlib.pyplot as plt
-# Step 1: Read the image
+
 img = cv2.imread("sample.jpg")
-# Step 2: Convert BGR to Grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# Step 3: Create layout
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
 plt.figure(figsize=(12,6))
-# Original Image (Left)
+
 plt.subplot(2,2,1)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-# Original Histogram (Right)
+
 plt.subplot(2,2,2)
-plt.hist(img.ravel(), 256)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
-# Grayscale Image (Left)
+
 plt.subplot(2,2,3)
-plt.imshow(gray, cmap='gray')
+plt.imshow(gray,cmap='gray')
 plt.title("Grayscale Image")
-# Grayscale Histogram (Right)
+
 plt.subplot(2,2,4)
-plt.hist(gray.ravel(), 256)
+plt.hist(gray.ravel(),256)
 plt.title("Grayscale Histogram")
+
 plt.show()
-# Save output
-cv2.imwrite("gray_output.jpg", gray)
+
+cv2.imwrite("gray_output.jpg",gray)
 
 
 
-Practical 2 Implement Basic Intensity transformation functions
-1. Image Inverse.
-2. Log Transformation.
-3. Power-law Transformation.
 
-Histogram of Original and Inverted image
+PRACTICAL 2
 
-code:
+Image Inverse (Negative Transformation)
+
 import cv2
 import matplotlib.pyplot as plt
-# Load the image
-img = cv2.imread('dog.jpg')
 
-img_neg = cv2.bitwise_not(img)
+img = cv2.imread("sample.jpg")
+inv = cv2.bitwise_not(img)
 
-# Plot histograms
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(12,6))
 
-plt.subplot(2, 2, 1)
-plt.imshow(img)
-plt.title('Original Image')
-
-plt.subplot(2, 2, 2)
-plt.hist(img.ravel(), bins=256, color='gray')
-plt.title('Original Histogram')
-
-plt.subplot(2, 2, 3)
-plt.imshow(img_neg)
-plt.title('Inverted Image')
-
-plt.subplot(2, 2, 4)
-plt.hist(img_neg.ravel(), bins=256, color='gray')
-plt.title(' Inverted Histogram')
-
-plt.tight_layout()
-plt.show()
-# Wait for a key press
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-2.Histogram of Original and Log Transformation.
-CODE:
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Load the image (color image)
-img = cv2.imread('rgb2gray.jpg')
-
-# Check image
-if img is None:
-    print("Image not found!")
-    exit()
-
-# Convert BGR → RGB for proper display
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
-# ----------------------------
-# LOG TRANSFORMATION
-# ----------------------------
-img_float = img.astype(np.float32)
-
-c = 255 / np.log(1 + np.max(img_float))
-log_img = c * np.log(1 + img_float)
-log_img = np.array(log_img, dtype=np.uint8)
-
-# Convert log image BGR → RGB
-log_img_rgb = cv2.cvtColor(log_img, cv2.COLOR_BGR2RGB)
-
-# ----------------------------
-# PLOT ORIGINAL + LOG + HISTOGRAM
-# ----------------------------
-plt.figure(figsize=(12, 6))
-
-# Original image
-plt.subplot(2, 2, 1)
-plt.imshow(img_rgb)
+plt.subplot(2,2,1)
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-plt.axis('off')
 
-# Original histogram
-plt.subplot(2, 2, 2)
-plt.hist(img_rgb.ravel(), bins=256, color='gray')
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
 plt.title("Original Histogram")
 
-# Log Transformed image
-plt.subplot(2, 2, 3)
-plt.imshow(log_img_rgb)
-plt.title("Log Transformed Image")
-plt.axis('off')
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(inv,cv2.COLOR_BGR2RGB))
+plt.title("Image Inverse")
 
-# Log Transformed histogram
-plt.subplot(2, 2, 4)
-plt.hist(log_img_rgb.ravel(), bins=256, color='gray')
-plt.title("Log Transformation Histogram")
+plt.subplot(2,2,4)
+plt.hist(inv.ravel(),256)
+plt.title("Inverse Histogram")
 
-plt.tight_layout()
 plt.show()
 
-3.Histogram of Original and Power-law Transformation.
-Code:
+cv2.imwrite("inverse_output.jpg",inv)
 
-import cv2
+Log Transformation
+
+	import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Load image
 img = cv2.imread("sample.jpg")
 
-if img is None:
-    print("Error: Image not found!")
-    exit()
+log = np.log1p(img.astype(float))
+log = cv2.normalize(log,None,0,255,cv2.NORM_MINMAX)
+log = np.uint8(log)
 
-# Convert BGR → RGB
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+plt.figure(figsize=(12,6))
 
-# Gamma values
-gamma_values = [0.1, 0.5, 1.2, 2.2]
+plt.subplot(2,2,1)
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.title("Original Image")
 
-plt.figure(figsize=(14, 12))
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
+plt.title("Original Histogram")
 
-# ---------- Original Image ----------
-plt.subplot(4, 3, 1)
-plt.imshow(img_rgb)
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(log,cv2.COLOR_BGR2RGB))
+plt.title("Log Transformed Image")
+
+plt.subplot(2,2,4)
+plt.hist(log.ravel(),256)
+plt.title("Log Histogram")
+
+plt.show()
+
+cv2.imwrite("log_transformed.jpg",log)
+
+Power-LawTransformation (Gamma Correction)
+
+	import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg")
+
+g = np.power(img.astype(float)/255.0,0.5)
+g = cv2.normalize(g,None,0,255,cv2.NORM_MINMAX)
+g = np.uint8(g)
+
+plt.figure(figsize=(12,6))
+
+plt.subplot(2,2,1)
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.title("Original Image")
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256)
+plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(g,cv2.COLOR_BGR2RGB))
+plt.title("Gamma Corrected")
+
+plt.subplot(2,2,4)
+plt.hist(g.ravel(),256)
+plt.title("Gamma Histogram")
+
+plt.show()
+
+cv2.imwrite("gamma_output.jpg",g)
+
+
+PRACTICAL 3
+
+Histogram Equalization
+
+	import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+equ = cv2.equalizeHist(img)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray')
 plt.title("Original Image")
 plt.axis('off')
 
-plt.subplot(4, 3, 2)
-plt.hist(img_rgb.ravel(), bins=256, color='gray')
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256])
 plt.title("Original Histogram")
 
-# ---------- Gamma Images ----------
-index = 3     # Start from subplot 3
+plt.subplot(2,2,3)
+plt.imshow(equ,cmap='gray')
+plt.title("Histogram Equalized Image")
+plt.axis('off')
 
-for gamma in gamma_values:
-
-    # Apply gamma correction
-    img_norm = img_rgb / 255.0
-    gamma_img = np.power(img_norm, gamma)
-    gamma_img = np.uint8(gamma_img * 255)
-
-    # Gamma image
-    plt.subplot(4, 3, index)
-    plt.imshow(gamma_img)
-    plt.axis("off")
-    plt.title(f"Gamma = {gamma}")
-
-    # Gamma histogram
-    plt.subplot(4, 3, index + 1)
-    plt.hist(gamma_img.ravel(), bins=256, color='gray')
-    plt.title(f"Histogram γ={gamma}")
-
-    index += 2   # Move to next available slot
+plt.subplot(2,2,4)
+plt.hist(equ.ravel(),256,[0,256])
+plt.title("Equalized Histogram")
 
 plt.tight_layout()
 plt.show()
 
-Practical 3: Histogram EqualizationTheory
-Code:
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-img = cv2.imread('C:/Users/hp/Downloads/dog.jpg', 0)
-plt.figure(figsize=(12, 6))
-plt.subplot(2, 2, 1)
-plt.imshow(img)
-plt.title("Original Image")
-plt.axis('off')
+res = np.hstack((img,equ))
+cv2.imwrite("histogram_equalization_output.jpg",res)
 
-equ = cv2.equalizeHist(img)
-#res = np.hstack((img, equ)).astype(np.uint8)
-plt.subplot(2, 2, 2)
-plt.imshow(equ)
-plt.title("equalized  Image")
-plt.axis('off')
-#cv2.imshow('Original vs Equalized', res)
+PRACTICAL 4
 
-plt.subplot(2, 2, 3)
-plt.hist(img.ravel(), 256, [0,256])
-plt.title("Original Image Histogram")
-#plt.show()
+Bit Plane Slicing
 
-plt.subplot(2, 2, 4)
-plt.hist(equ.ravel(), 256, [0,256])
-plt.title("Equalized Image Histogram")
-plt.show()
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-Practical No.4: Bit Plane Slicing
-Code:
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Load grayscale image
+img = cv2.imread("sample.jpg")
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-gray = cv2.imread('C:/Users/hp/Downloads/lena_gray.bmp', 0)
+plt.figure(figsize=(18,6))
 
-if gray is None:
-    print("Error: Could not load the image.")
-    exit()
+plt.subplot(2,9,1)
+plt.imshow(gray,cmap='gray')
+plt.title("Original")
+plt.axis('off')
 
-# Show original image
+plt.subplot(2,9,10)
+plt.hist(gray.ravel(),256,[0,256])
+plt.title("Hist")
 
-cv2.namedWindow('Original Image', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('Original Image', 350, 350)
-cv2.imshow('Original Image', gray)
+for i in range(8):    
+    bit = np.bitwise_and(gray,2**i)
+    bit = (bit*255).astype(np.uint8)
 
-# Histogram of original image
+    plt.subplot(2,9,i+2)
+    plt.imshow(bit,cmap='gray')
+    plt.title(f"Bit {i}")
+    plt.axis('off')
 
-plt.figure(figsize=(6, 4))
-plt.hist(gray.ravel(), bins=256, range=[0, 256],
-         color='gray', alpha=0.8)
-plt.title('Histogram of Original Image')
-plt.xlabel('Pixel Intensity')
-plt.ylabel('Frequency')
+    plt.subplot(2,9,i+11)
+    plt.hist(bit.ravel(),256,[0,256])
+    plt.title(f"H{i}")
+
+plt.tight_layout()
 plt.show()
 
-# Initialize reconstructed images
 
-reconstructed_3bit = np.zeros_like(gray)
-reconstructed_4bit = np.zeros_like(gray)
+PRACTICAL 5
 
-# Colors for bit-plane histograms
-colors = ['red', 'green', 'blue', 'orange',
-          'purple', 'brown', 'pink', 'black']
-
-# Bit-plane slicing
-
-for i in range(8):
-
-    # Extract bit plane
-    bit_plane = (gray >> i) & 1
-    bit_plane_img = (bit_plane * 255).astype(np.uint8)
-
-    # Display bit plane
-    cv2.namedWindow(f'Bit Plane {i}', cv2.WINDOW_NORMAL)
-    cv2.resizeWindow(f'Bit Plane {i}', 300, 300)
-    cv2.imshow(f'Bit Plane {i}', bit_plane_img)
-
-    # Colored histogram for bit plane
-    plt.figure(figsize=(4, 3))
-    plt.hist(bit_plane_img.ravel(),
-             bins=256, range=[0, 256],
-             color=colors[i], alpha=0.7)
-    plt.title(f'Histogram of Bit Plane {i}')
-    plt.xlabel('Pixel Intensity')
-    plt.ylabel('Frequency')
-    plt.show()
-
-    # Image reconstruction
-
-    if i in [4, 5, 6, 7]:   # 4-bit reconstruction
-        reconstructed_4bit += bit_plane * (2 ** i)
-
-# Display reconstructed images
-
-cv2.namedWindow('Reconstructed Image (4 Bit Planes)', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('Reconstructed Image (4 Bit Planes)', 350, 350)
-cv2.imshow('Reconstructed Image (4 Bit Planes)', reconstructed_4bit)
-
-# Histogram of reconstructed images
-
-plt.figure(figsize=(6, 4))
-plt.hist(reconstructed_4bit.ravel(), bins=256, range=[0, 256],
-         color='green', alpha=0.8)
-plt.title('Histogram of Reconstructed Image (4 Bit Planes)')
-plt.xlabel('Pixel Intensity')
-plt.ylabel('Frequency')
-plt.show()
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-                                      Practical No. 5
-
-1.Low Pass - Average, Weighted Average, Median and Gaussian.
-      i) Average
-Code:.
+Averaging (Mean) Filter
 import cv2
-import numpy as np
-img = cv2.imread("C:/Users/hp/OneDrive - RAMNIRANJAN JHUNJHUNWALA COLLEGE/Pictures/download (2).jpeg", cv2.IMREAD_GRAYSCALE)
-avg = cv2.blur(img, (3,3))
-avg_out = cv2.hconcat([img, avg])
+import matplotlib.pyplot as plt
 
-cv2.imshow("Average Filter | Input | Output", avg_out)
-cv2.waitKey(0)
-Output:
+img = cv2.imread("sample.jpg",0)
+avg = cv2.boxFilter(img,-1,(5,5))
 
-ii) Weighted Average
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray')
+plt.title("Original Image")
+plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256])
+plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(avg,cmap='gray')
+plt.title("Box Filter Image")
+plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(avg.ravel(),256,[0,256])
+plt.title("Box Filter Histogram")
+
+plt.tight_layout()
+plt.show()
+
+Weighted Averaging Filter
 
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
+  
+img = cv2.imread("sample.jpg",0)
 
-img = cv2.imread("coin.jpg", cv2.IMREAD_GRAYSCALE)
 kernel = np.array([[1,2,1],
                    [2,4,2],
-                   [1,2,1]], np.float32) / 16
-weighted = cv2.filter2D(img, -1, kernel)
-weighted_out = cv2.hconcat([img, weighted])
+                   [1,2,1]])/16
 
-cv2.imshow("Weighted Average Filter | Input | Output", weighted_out)
-cv2.waitKey(0)
+weight = cv2.filter2D(img,-1,kernel)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray')
+plt.title("Original Image")
+plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256])
+plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(weight,cmap='gray')
+plt.title("Weighted Filter")
+plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(weight.ravel(),256,[0,256])
+plt.title("Weighted Histogram")
+
+plt.tight_layout()
+plt.show()
 
 
-iii) Median
-Code:
+Median Filter
+	
+	import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+med = cv2.medianBlur(img,7)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray')
+plt.title("Original Image")
+plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256])
+plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(med,cmap='gray')
+plt.title("Median Filter Image")
+plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(med.ravel(),256,[0,256])
+plt.title("Median Histogram")
+
+plt.tight_layout()
+plt.show()
+
+Gaussian Filter
+	
+	import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+gauss = cv2.GaussianBlur(img,(7,7),2)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray')
+plt.title("Original Image")
+plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256])
+plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(gauss,cmap='gray')
+plt.title("Gaussian Blur")
+plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(gauss.ravel(),256,[0,256])
+plt.title("Gaussian Histogram")
+
+plt.tight_layout()
+plt.show()
+
+Laplacian Filter
+
 import cv2
-import numpy as np
-img = cv2.imread("coin.jpg", cv2.IMREAD_GRAYSCALE)
-median = cv2.medianBlur(img, 3)
-median_out = cv2.hconcat([img, median])
-cv2.imshow("Median Filter | Input | Output", median_out)
-cv2.waitKey(0)
+import matplotlib.pyplot as plt
 
+img = cv2.imread("sample.jpg",0)
+lap = cv2.convertScaleAbs(cv2.Laplacian(img,cv2.CV_64F))
 
- iv) Gaussian
-Code:
-import cv2
-import numpy as np
-img = cv2.imread("coin.jpg", cv2.IMREAD_GRAYSCALE)
-gaussian = cv2.GaussianBlur(img, (5,5), 1)
-gaussian_out = cv2.hconcat([img, gaussian])
-cv2.imshow("Gaussian Filter | Input | Output", gaussian_out)
-cv2.waitKey(0)
+plt.figure(figsize=(10,8))
 
-Output:
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray'); plt.title("Original Image"); plt.axis('off')
 
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256]); plt.title("Original Histogram")
 
+plt.subplot(2,2,3)
+plt.imshow(lap,cmap='gray'); plt.title("Laplacian Filter"); plt.axis('off')
 
-2. High Pass - Laplacian Filter, Sobel, Robert and Prewitt Filter
+plt.subplot(2,2,4)
+plt.hist(lap.ravel(),256,[0,256]); plt.title("Laplacian Histogram")
 
-iii)Robert
-Code:
+plt.tight_layout()
+plt.show()
+
+Sobel Filter
+
+	import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+
+sx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=3)
+sy = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=3)
+sob = cv2.convertScaleAbs(sx+sy)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray'); plt.title("Original Image"); plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256]); plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(sob,cmap='gray'); plt.title("Sobel Filter"); plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(sob.ravel(),256,[0,256]); plt.title("Sobel Histogram")
+
+plt.tight_layout()
+plt.show()
+
+Roberts Filter
+
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Read image in grayscale
-img = cv2.imread("coin.jpg", 0)
+img = cv2.imread("sample.jpg",0)
 
-# Roberts kernels
-roberts_x = np.array([[1, 0],
-                      [0, -1]])
+kx = np.array([[1,0],[0,-1]])
+ky = np.array([[0,1],[-1,0]])
 
-roberts_y = np.array([[0, 1],
-                      [-1, 0]])
+rx = cv2.filter2D(img,-1,kx)
+ry = cv2.filter2D(img,-1,ky)
+rob = rx + ry
 
-# Apply Roberts filter
-robertsX = cv2.filter2D(img, -1, roberts_x)
-robertsY = cv2.filter2D(img, -1, roberts_y)
-roberts = robertsX + robertsY
+plt.figure(figsize=(10,8))
 
-# Display results
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray'); plt.title("Original Image"); plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256]); plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(rob,cmap='gray'); plt.title("Roberts Filter"); plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(rob.ravel(),256,[0,256]); plt.title("Roberts Histogram")
+
+plt.tight_layout()
+plt.show()
+
+Prewitt Filter
+
+	import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+
+kx = np.array([[1,0,-1],[1,0,-1],[1,0,-1]])
+ky = np.array([[1,1,1],[0,0,0],[-1,-1,-1]])
+
+px = cv2.filter2D(img,-1,kx)
+py = cv2.filter2D(img,-1,ky)
+pre = px + py
+
+plt.figure(figsize=(10,8))
+  
+plt.subplot(2,2,1)
+plt.imshow(img,cmap='gray'); plt.title("Original Image"); plt.axis('off')
+
+plt.subplot(2,2,2)
+plt.hist(img.ravel(),256,[0,256]); plt.title("Original Histogram")
+
+plt.subplot(2,2,3)
+plt.imshow(pre,cmap='gray'); plt.title("Prewitt Filter"); plt.axis('off')
+
+plt.subplot(2,2,4)
+plt.hist(pre.ravel(),256,[0,256]); plt.title("Prewitt Histogram")
+
+plt.tight_layout()
+plt.show()
+
+
+PRACTICAL 6
+
+Tesseract OCR Installation (Very Short)
+1️⃣ Download
+Download installer from:
+https://github.com/UB-Mannheim/tesseract/wiki
+Example file:
+tesseract-ocr-w64-setup-v5.x.x.exe
+2️⃣ Install
+Run the .exe file.
+Default path:
+C:\Program Files\Tesseract-OCR\
+3️⃣ Add to PATH
+Add this to Environment Variables → Path:
+C:\Program Files\Tesseract-OCR\
+4️⃣ Install Python Packages
+pip install pytesseract
+pip install pillow
+5️⃣ Check Installation
+tesseract --version
+
+
+Image to Text using OCR
+import pytesseract
+from PIL import Image
+
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+img = Image.open("meow.png")
+text = pytesseract.image_to_string(img)
+
+print("Extracted Text:")
+print(text)
+
+Skew Detection & Correction
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("meow2.png")
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+_,th = cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+
+coords = np.column_stack(np.where(th>0))
+angle = cv2.minAreaRect(coords)[-1]
+
+angle = -(90+angle) if angle<-45 else -angle
+
+h,w = img.shape[:2]
+M = cv2.getRotationMatrix2D((w//2,h//2),angle,1)
+rot = cv2.warpAffine(img,M,(w,h),flags=cv2.INTER_CUBIC,
+                     borderMode=cv2.BORDER_REPLICATE)
+
+plt.figure(figsize=(10,5))
+
 plt.subplot(1,2,1)
-plt.title("Original Image")
-plt.imshow(img, cmap='gray')
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.title("Original Skewed")
 plt.axis('off')
 
 plt.subplot(1,2,2)
-plt.title("Roberts Filter Output")
-plt.imshow(roberts, cmap='gray')
+plt.imshow(cv2.cvtColor(rot,cv2.COLOR_BGR2RGB))
+plt.title("Corrected Image")
 plt.axis('off')
 
+plt.tight_layout()
 plt.show()
 
-iv)Prewitt Filter
-Code:
-import cv2
-import numpy as np
+
+PRACTICAL 7
+Image Watermarking
+
+	import cv2
 import matplotlib.pyplot as plt
 
-# Read image in grayscale
-img = cv2.imread("dog.jpg", 0)
+img = cv2.imread("sample2.jpg")
+wm = cv2.imread("text.png")
 
-# Prewitt kernels
-prewitt_x = np.array([[-1, 0, 1],
-                      [-1, 0, 1],
-                      [-1, 0, 1]])
+img = cv2.resize(img,(img.shape[1]//2,img.shape[0]//2))
+wm = cv2.resize(wm,(int(wm.shape[1]*0.8),int(wm.shape[0]*0.8)))
 
-prewitt_y = np.array([[1, 1, 1],
-                      [0, 0, 0],
-                      [-1, -1, -1]])
+h,w,_ = img.shape
+hw,ww,_ = wm.shape
 
-# Apply Prewitt filter
-prewittX = cv2.filter2D(img, -1, prewitt_x)
-prewittY = cv2.filter2D(img, -1, prewitt_y)
-prewitt = prewittX + prewittY
+x = w-ww-10
+y = 10
 
-# Display output
-plt.subplot(1, 2, 1)
+roi = img[y:y+hw, x:x+ww]
+img[y:y+hw, x:x+ww] = cv2.addWeighted(roi,0,wm,0.3,0)
+
+plt.figure(figsize=(10,4))
+
+plt.subplot(1,2,1)
+plt.imshow(cv2.cvtColor(cv2.imread("sample2.jpg"),cv2.COLOR_BGR2RGB))
 plt.title("Original Image")
-plt.imshow(img, cmap='gray')
 plt.axis('off')
 
-plt.subplot(1, 2, 2)
-plt.title("Prewitt Filter Output")
-plt.imshow(prewitt, cmap='gray')
+plt.subplot(1,2,2)
+plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.title("Watermarked Image (Top Right)")
 plt.axis('off')
 
+plt.tight_layout()
 plt.show()
 
-Output:
+cv2.imwrite("Watermarked_Image.jpg",img)
 
 
+PRACTICAL 8
 
-
-                       Practical No. 06: Extracting Text from Image (OCR) using Google Tesseract-OCR
-
-Code:
-import pytesseract as tess
-tess.pytesseract.tesseract_cmd=r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-from PIL import Image
-img = Image.open('OCR.png')
-text = tess.image_to_string(img)
-print(text)
-
-Correct skewness
-Code:
-import cv2
-import numpy as np
-# Load image
-image = cv2.imread("skew.png")
-# Convert to grayscale
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# Invert colors & threshold
-_, thresh = cv2.threshold(gray, 0, 255,
-                           cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# Get coordinates of text pixels
-coords = np.column_stack(np.where(thresh > 0))
-
-# Get angle of rotation
-angle = cv2.minAreaRect(coords)[-1]
-
-# Adjust angle
-if angle < -45:
-    angle = -(90 + angle)
-else:
-    angle = -angle
-
-# Rotate image
-(h, w) = image.shape[:2]
-center = (w // 2, h // 2)
-
-M = cv2.getRotationMatrix2D(center, angle, 1.0)
-rotated = cv2.warpAffine(image, M, (w, h),
-                          flags=cv2.INTER_CUBIC,
-                          borderMode=cv2.BORDER_REPLICATE)
-
-# Show results
-cv2.imshow("Original", image)
-cv2.imshow("Deskewed", rotated)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-                           Practical No.07: Image Watermarking
- Image Watermarking
-Code:
-import cv2
-import numpy as np
-img=cv2.imread('Road.png')
-watermark=cv2.imread('sign.png')
-if img is None or watermark is None:
-    print("Error loading image")
-    exit()
-output=img.copy()
-wm_scale=30
-h_wm,w_wm=watermark.shape[:2]
-watermark=cv2.resize(watermark,(w_wm*wm_scale//100,h_wm*wm_scale//100),interpolation=cv2.INTER_AREA)
-img_h,img_w=output.shape[:2]
-wm_h,wm_w=watermark.shape[:2]
-x=20
-y=img_h-wm_h-20
-roi=output[y:y+wm_h,x:x+wm_w]
-blended=cv2.addWeighted(roi,1,watermark,0.3,0)
-output[y:y+wm_h,x:x+wm_w]=blended
-cv2.imwrite("Watermarked_LeftBottom.jpg",output)
-cv2.imshow("Watermarked Image",output)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-Input Image:
-Road.png
-
-Sing.png
-
-
-          Practical No.8:Morphological operation based on OpenCV
-a.Erosion 
-Code:
-import cv2
-import numpy as np
-# Read image
-img = cv2.imread('input.jpg')
-# Convert to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# Convert to binary image (white text on black background)
-_, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-# Define structuring element (kernel)
-kernel = np.ones((3,3), np.uint8)   # You can change size (3,3), (5,5), etc.
-# Apply erosion
-eroded = cv2.erode(binary, kernel, iterations=1)
-# Show results
-cv2.imshow("Original", binary)
-cv2.imshow("Eroded", eroded)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-# Save output if needed
-cv2.imwrite("eroded_output.png", eroded)
-
-b. Dilation
-Code:
-import cv2
-import numpy as np
-# Read image
-img = cv2.imread('input.jpg')
-# Convert to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# Threshold (make sure text is WHITE and background BLACK)
-_, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-# Define structuring element (kernel)
-kernel = np.ones((3,3), np.uint8)   # Try (5,5) for stronger dilation
-# Apply dilation
-dilated = cv2.dilate(binary, kernel, iterations=1)
-# Show results
-cv2.imshow("Original", binary)
-cv2.imshow("Dilated", dilated)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-# Save output if needed
-cv2.imwrite("dilated_output.png", dilated)
-
-c.Opening
-Code:
-import cv2
-import numpy as np
-
-# Read image
-img = cv2.imread('Car.png')
-
-# Convert to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# Convert to binary image
-_, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-
-# Define structuring element (kernel)
-kernel = np.ones((5,5), np.uint8)   # Adjust size based on noise
-
-# Apply Opening (Erosion followed by Dilation)
-opening = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
-
-# Show results
-cv2.imshow("Original", binary)
-cv2.imshow("Opening", opening)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-# Save output
-cv2.imwrite("opening_output.png", opening)
-
-d.Closing
-Code:
-import cv2
-import numpy as np
-
-# Read image
-img = cv2.imread('Car.png')
-
-# Convert to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# Convert to binary image
-_, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-
-# Define structuring element (kernel)
-kernel = np.ones((5,5), np.uint8)   # Adjust size if needed
-
-# Apply Closing (Dilation followed by Erosion)
-closing = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
-
-# Show results
-cv2.imshow("Original", binary)
-cv2.imshow("Closing", closing)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-# Save output
-cv2.imwrite("closing_output.png", closing)
-
-e.Boundary extraction.
-Code
-import cv2
-import numpy as np
-
-# Read grayscale image
-img = cv2.imread('input.jpg', 0)
-
-# Convert to binary (white object, black background)
-_, binary = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
-
-# Define kernel
-kernel = np.ones((3,3), np.uint8)
-
-# Erode image
-eroded = cv2.erode(binary, kernel, iterations=1)
-
-# Boundary extraction
-boundary = cv2.subtract(binary, eroded)
-
-# Ensure black background & white boundary
-boundary = cv2.threshold(boundary, 0, 255, cv2.THRESH_BINARY)[1]
-
-# Show results
-cv2.imshow("Original", binary)
-cv2.imshow("Boundary Output", boundary)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-f.HIT and Miss.
-Code
+Erosion & Dilation
 
 import cv2
 import numpy as np
-
-# Read grayscale image
-img = cv2.imread('thumb.jpg', 0)
-
-# Convert to binary (white object, black background)
-_, binary = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
-
-# Convert to 0 and 1 (IMPORTANT)
-binary = binary // 255
-
-# Define structuring element
-# 1  -> foreground must match
-# -1 -> background must match
-# 0  -> don't care
-
-kernel = np.array([[0,  1, 0],
-                   [1, -1, 1],
-                   [0,  1, 0]], dtype=np.int8)
-
-# Apply Hit-or-Miss
-hitmiss = cv2.morphologyEx(binary.astype(np.uint8),
-                           cv2.MORPH_HITMISS,
-                           kernel)
-
-# Convert result back to 0-255
-hitmiss = hitmiss * 255
-
-# Show results
-cv2.imshow("Original", binary*255)
-cv2.imshow("Hit and Miss Output", hitmiss)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-Output:
-
-
-                  Practical No.9: Color Image Processing
-Code:
-import cv2
-
-img = cv2.imread("image.png")
-
-print(img)   # Check karega image load hui ya nahi
-
-cv2.imshow("Original Image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-2.Convert Color Spaces (BGR → Gray, HSV, RGB)
-Code:
-import cv2
-img = cv2.imread("image.png")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-hsv  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-rgb  = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-cv2.imshow("Gray", gray)
-cv2.imshow("HSV", hsv)
-cv2.imshow("RGB", rgb)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-3. Extract a Specific Color (Yellow Detection Example)
-Code:
-import cv2
-import numpy as np
-
-img = cv2.imread("HSIColor.png")
-image = cv2.resize(img, (700, 600))
-
-hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-lower = np.array([20, 100, 100])
-upper = np.array([35, 255, 255])
-
-mask = cv2.inRange(hsv, lower, upper)
-
-result = cv2.bitwise_and(image, image, mask=mask)
-
-cv2.imshow("Original", image)
-cv2.imshow("Mask", mask)
-cv2.imshow("Yellow Detected", result)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-4.Split and Merge Color Channels
-Code:
-import cv2
-import numpy as np
-
-img = cv2.imread("image.png")
-
-b, g, r = cv2.split(img)
-
-cv2.imshow("Blue Channel", b)
-cv2.imshow("Green Channel", g)
-cv2.imshow("Red Channel", r)
-
-merged = cv2.merge([b, g, r])
-cv2.imshow("Merged Image", merged)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-5. Image Smoothing (Color Image Blur)
-Code:
-import cv2
-
-img = cv2.imread("image.png")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-edges = cv2.Canny(gray, 100, 200)
-
-cv2.imshow("Original", img)
-cv2.imshow("Edges", edges)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-6.Change Brightness and Contrast
-Code:
-import cv2
-
-img = cv2.imread("image.png")
-
-# alpha = contrast, beta = brightness
-new_img = cv2.convertScaleAbs(img, alpha=1.5, beta=30)
-
-cv2.imshow("Original", img)
-cv2.imshow("Brightened", new_img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-7.Histogram of Color Image
-Code:
-import cv2
 import matplotlib.pyplot as plt
 
-img = cv2.imread("image.png")
+img = cv2.imread("sample.jpg",0)
+_,img = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 
-colors = ('b', 'g', 'r')
+k = np.ones((5,5),np.uint8)
 
-for i, col in enumerate(colors):
-    hist = cv2.calcHist([img], [i], None, [256], [0,256])
-    plt.plot(hist, color=col)
+ero = cv2.erode(img,k,1)
+dil = cv2.dilate(img,k,1)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,3,1); plt.imshow(img,cmap='gray'); plt.title("Original")
+plt.subplot(2,3,2); plt.imshow(ero,cmap='gray'); plt.title("Erosion")
+plt.subplot(2,3,3); plt.imshow(dil,cmap='gray'); plt.title("Dilation")
+
+plt.subplot(2,3,4); plt.hist(img.ravel(),256,[0,256])
+plt.subplot(2,3,5); plt.hist(ero.ravel(),256,[0,256])
+plt.subplot(2,3,6); plt.hist(dil.ravel(),256,[0,256])
+
+plt.tight_layout(); plt.show()
+
+Opening & Closing
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+_,img = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+
+k = np.ones((5,5),np.uint8)
+
+open_img = cv2.morphologyEx(img,cv2.MORPH_OPEN,k)
+close_img = cv2.morphologyEx(img,cv2.MORPH_CLOSE,k)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,3,1); plt.imshow(img,cmap='gray'); plt.title("Original")
+plt.subplot(2,3,2); plt.imshow(open_img,cmap='gray'); plt.title("Opening")
+plt.subplot(2,3,3); plt.imshow(close_img,cmap='gray'); plt.title("Closing")
+
+plt.subplot(2,3,4); plt.hist(img.ravel(),256,[0,256])
+plt.subplot(2,3,5); plt.hist(open_img.ravel(),256,[0,256])
+plt.subplot(2,3,6); plt.hist(close_img.ravel(),256,[0,256])
+
+plt.tight_layout(); plt.show()
+
+Boundary Extraction
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+_,img = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+
+k = np.ones((5,5),np.uint8)
+
+ero = cv2.erode(img,k,1)
+bound = cv2.subtract(img,ero)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,2,1); plt.imshow(img,cmap='gray'); plt.title("Original")
+plt.subplot(2,2,2); plt.imshow(bound,cmap='gray'); plt.title("Boundary")
+
+plt.subplot(2,2,3); plt.hist(img.ravel(),256,[0,256])
+plt.subplot(2,2,4); plt.hist(bound.ravel(),256,[0,256])
+
+plt.tight_layout(); plt.show()
+
+Hit-or-Miss
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+_,img = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+
+kernel = np.array([[0,1,0],
+                  [1,-1,1],
+                  [0,1,0]],np.int8)
+
+hit = cv2.morphologyEx(img,cv2.MORPH_HITMISS,kernel)
+
+plt.figure(figsize=(10,6))
+
+plt.subplot(2,2,1); plt.imshow(img,cmap='gray'); plt.title("Original")
+plt.subplot(2,2,2); plt.imshow(hit,cmap='gray'); plt.title("Hit-or-Miss")
+
+plt.subplot(2,2,3); plt.hist(img.ravel(),256,[0,256])
+plt.subplot(2,2,4); plt.hist(hit.ravel(),256,[0,256])
+
+plt.tight_layout(); plt.show()
+
+Thinning & Thickening
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg",0)
+_,img = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+
+k = np.ones((5,5),np.uint8)
+
+thin = cv2.erode(img,k,1)
+thick = cv2.dilate(img,k,1)
+
+plt.figure(figsize=(10,8))
+
+plt.subplot(2,3,1); plt.imshow(img,cmap='gray'); plt.title("Original")
+plt.subplot(2,3,2); plt.imshow(thin,cmap='gray'); plt.title("Thinning")
+plt.subplot(2,3,3); plt.imshow(thick,cmap='gray'); plt.title("Thickening")
+
+plt.subplot(2,3,4); plt.hist(img.ravel(),256,[0,256])
+plt.subplot(2,3,5); plt.hist(thin.ravel(),256,[0,256])
+plt.subplot(2,3,6); plt.hist(thick.ravel(),256,[0,256])
+
+plt.tight_layout(); plt.show()
+
+PRACTICAL 9
+
+Read and Display a Color Image
+Convert Color Spaces (BGR → Gray, HSV, RGB)
+Extract a Specific Color (Yellow Detection)
+Split and Merge Color Channels
+Change Brightness and Contrast
+Histogram of Color Image
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread("sample.jpg")
+rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+hsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+
+mask = cv2.inRange(hsv,np.array([20,100,100]),np.array([35,255,255]))
+
+b,g,r = cv2.split(img)
+
+bright = cv2.convertScaleAbs(img,alpha=1.5,beta=30)
+
+plt.figure(figsize=(14,10))
+
+plt.subplot(3,3,1); plt.imshow(rgb); plt.title("Original"); plt.axis('off')
+plt.subplot(3,3,2); plt.imshow(gray,cmap='gray'); plt.title("Gray"); plt.axis('off')
+plt.subplot(3,3,3); plt.imshow(hsv); plt.title("HSV"); plt.axis('off')
+
+plt.subplot(3,3,4); plt.imshow(mask,cmap='gray'); plt.title("Yellow Detection"); plt.axis('off')
+plt.subplot(3,3,5); plt.imshow(cv2.cvtColor(bright,cv2.COLOR_BGR2RGB)); plt.title("Brightness"); plt.axis('off')
+plt.subplot(3,3,6); plt.imshow(cv2.cvtColor(cv2.merge([b,g,r]),cv2.COLOR_BGR2RGB)); plt.title("Merged"); plt.axis('off')
+
+plt.subplot(3,3,7); plt.imshow(b,cmap='gray'); plt.title("Blue"); plt.axis('off')
+plt.subplot(3,3,8); plt.imshow(g,cmap='gray'); plt.title("Green"); plt.axis('off')
+plt.subplot(3,3,9); plt.imshow(r,cmap='gray'); plt.title("Red"); plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+
+plt.figure()
+for i,c in enumerate(('b','g','r')):
+    plt.plot(cv2.calcHist([img],[i],None,[256],[0,256]),color=c)
 
 plt.title("Color Histogram")
-plt.xlabel("Pixel Intensity")
-plt.ylabel("Frequency")
 plt.show()
-
-8.Image Negative (Color Inversion)
-Code:
-import cv2
-
-img = cv2.imread("image.png")
-
-negative = 255 - img
-
-cv2.imshow("Original", img)
-cv2.imshow("Negative", negative)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-9.Real-Time Color Detection (Webcam – Yellow)
-Code:
-import cv2
-import numpy as np
-import time
-
-cap = cv2.VideoCapture(0)
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
-
-    frame = cv2.resize(frame, (640, 480))
-    blurred = cv2.GaussianBlur(frame, (11, 11), 0)
-    hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
-
-    # Color ranges
-    colors = {
-        "Yellow": ([20, 100, 100], [35, 255, 255], (0,255,255)),
-        "Green": ([40, 50, 50], [80, 255, 255], (0,255,0)),
-        "Red1": ([0, 120, 70], [10, 255, 255], (0,0,255)),
-        "Red2": ([170,120,70], [180,255,255], (0,0,255))
-    }
-
-    for name in colors:
-        lower = np.array(colors[name][0])
-        upper = np.array(colors[name][1])
-        color_box = colors[name][2]
-
-        mask = cv2.inRange(hsv, lower, upper)
-        kernel = np.ones((5,5), np.uint8)
-        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        for cnt in contours:
-            area = cv2.contourArea(cnt)
-            if area > 1000:
-                x, y, w, h = cv2.boundingRect(cnt)
-                cx = int(x + w/2)
-                cy = int(y + h/2)
-
-                cv2.rectangle(frame, (x,y), (x+w,y+h), color_box, 3)
-                cv2.circle(frame, (cx,cy), 5, color_box, -1)
-
-                cv2.putText(frame, f"{name}", (x,y-10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, color_box, 2)
-
-                cv2.putText(frame, f"({cx},{cy})", (cx+10,cy),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, color_box, 2)
-
-    cv2.imshow("Multi Color Detection", frame)
-
-    key = cv2.waitKey(1) & 0xFF
-
-    # Press 's' to save screenshot
-    if key == ord('s'):
-        filename = f"screenshot_{int(time.time())}.png"
-        cv2.imwrite(filename, frame)
-        print("Screenshot Saved:", filename)
-
-    # Press 'q' to quit
-    if key == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-Output:
-
-
-
-                   Practical No. 10: Image Compression
-
-1️. Lossy 
-
-Code:
-import cv2
-import os
-
-# Read Image
-img = cv2.imread("HSIColor.png")
-
-if img is None:
-    print("Image not found!")
-    exit()
-
-# 1️⃣ JPEG Compression (High Quality)
-cv2.imwrite("high_quality.jpg", img,
-            [cv2.IMWRITE_JPEG_QUALITY, 95])
-
-# 2️⃣ JPEG Compression (Low Quality)
-cv2.imwrite("low_quality.jpg", img,
-            [cv2.IMWRITE_JPEG_QUALITY, 30])
-
-# 3️⃣ PNG Compression (Lossless)
-cv2.imwrite("compressed_png.png", img,
-            [cv2.IMWRITE_PNG_COMPRESSION, 9])
-
-# 4️⃣ Resize + Compression
-resized = cv2.resize(img, (400, 300))
-cv2.imwrite("resized_compressed.jpg", resized,
-            [cv2.IMWRITE_JPEG_QUALITY, 80])
-
-# 📊 Compare File Sizes
-print("Original Size:", os.path.getsize("HSIColor.png"), "bytes")
-print("High Quality JPEG:", os.path.getsize("high_quality.jpg"), "bytes")
-print("Low Quality JPEG:", os.path.getsize("low_quality.jpg"), "bytes")
-print("PNG Compressed:", os.path.getsize("compressed_png.png"), "bytes")
-print("Resized + Compressed:", os.path.getsize("resized_compressed.jpg"), "bytes")
-print("\nCompression Completed Successfully ✅")
-
-
-
-
